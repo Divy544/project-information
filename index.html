@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireless Control System Project</title>
+    <style>
+        /* From Uiverse.io by barisdogansutcu */
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            position: relative;
+            padding: 0 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+            border: 0;
+            box-shadow: hsl(210deg 87% 36%) 0px 7px 0px 0px;
+            background-color: hsl(210deg 100% 44%);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 31ms cubic-bezier(.5, .7, .4, 1);
+        }
+
+        button:before {
+            content: attr(alt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            inset: 0;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 4px;
+            opacity: 1;
+        }
+
+        button:active {
+            box-shadow: none;
+            transform: translateY(7px);
+            transition: 35ms cubic-bezier(.5, .7, .4, 1);
+        }
+
+        button:hover:before {
+            transition: all .0s;
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        button i {
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            font-style: normal;
+            transition: all 2s ease;
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        button:hover i {
+            transition: all .2s ease;
+            transform: translateY(0px);
+            opacity: 1;
+        }
+
+        button:hover i:nth-child(1) {
+            transition-delay: 0.045s;
+        }
+
+        button:hover i:nth-child(2) {
+            transition-delay: calc(0.045s * 3);
+        }
+
+        button:hover i:nth-child(3) {
+            transition-delay: calc(0.045s * 4);
+        }
+
+        button:hover i:nth-child(4) {
+            transition-delay: calc(0.045s * 5);
+        }
+
+        button:hover i:nth-child(6) {
+            transition-delay: calc(0.045s * 6);
+        }
+
+        button:hover i:nth-child(7) {
+            transition-delay: calc(0.045s * 7);
+        }
+
+        button:hover i:nth-child(8) {
+            transition-delay: calc(0.045s * 8);
+        }
+
+        button:hover i:nth-child(9) {
+            transition-delay: calc(0.045s * 9);
+        }
+
+        button:hover i:nth-child(10) {
+            transition-delay: calc(0.045s * 10);
+        }
+
+        /* Custom styles for the main content */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: none; /* Initially hide the main content */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+            overflow-y: auto;
+            height: 100vh;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            animation: fadeInDown 1s ease-in-out;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        h2 {
+            font-size: 2em;
+            margin-top: 1em;
+        }
+        h3 {
+            font-size: 1.5em;
+            margin-top: 1em;
+        }
+        p, ul {
+            font-size: 1.2em;
+            line-height: 1.6;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        .section {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .code-block {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: monospace;
+        }
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .photo-gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(1.05);
+        }
+        a {
+            color: #ff7e5f;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        a:hover {
+            color: #feb47b;
+        }
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .circuit-diagram img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <button alt="Click here" onclick="showContent()">
+        <i>t</i>
+        <i>h</i>
+        <i>a</i>
+        <i>n</i>
+        <i>k</i>
+        <i>&nbsp;</i>
+        <i>y</i>
+        <i>o</i>
+        <i>u</i>
+    </button>
+
+    <div class="container">
+        <h1>WIRELESS CONTROL SYSTEM</h1>
+        <h2>Government Polytechnic Himatnagar</h2>
+        <h3>Project Report</h3>
+        <p>Submitted by:</p>
+        <ul>
+            <li>Patel Divy P. (Enrollment No.: 236248309013)</li>
+            <li>Patel Ravi D. (Enrollment No.: 236248309014)</li>
+            <li>Patel Nil V. (Enrollment No.: 216240309021)</li>
+            <li>Trivedi Raj G. (Enrollment No.: 216240309006)</li>
+        </ul>
+        <p>Date: 27.06.2024 to 07.08.2024</p>
+
+        <div class="section">
+            <h2>ABSTRACT</h2>
+            <p>The <strong>"Wireless Control System"</strong> project aims to develop a system that allows for the wireless control of electrical devices using an ESP32 microcontroller and a relay module. The project involves the use of four relays to control four different electrical loads, such as bulbs, from a remote location via Wi-Fi. This system is designed to be user-friendly and cost-effective, providing an efficient solution for home automation. The project has significant potential applications in residential and industrial settings where remote control of electrical devices is necessary.</p>
+        </div>
+
+        <div class="section">
+            <h2>TABLE OF CONTENTS</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#objective">Objective</a></li>
+                <li><a href="#components">Components Used</a></li>
+                <li><a href="#circuit-diagram">Circuit Diagram</a></li>
+                <li><a href="#working-principle">Working Principle</a></li>
+                <li><a href="#software">Software Implementation</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#advantages">Advantages and Limitations</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </div>
+
+        <div class="section" id="introduction">
+            <h2>INTRODUCTION</h2>
+            <p>The Wireless Control System is a modern approach to home automation that leverages the capabilities of the ESP32 microcontroller. This system allows users to control electrical devices remotely through a Wi-Fi connection. The project is designed to demonstrate the practical applications of wireless communication in controlling electrical loads efficiently and reliably. The main objective is to provide a user-friendly and scalable solution for home and industrial automation.</p>
+        </div>
+
+        <div class="section" id="objective">
+            <h2>OBJECTIVE</h2>
+            <p>The objective of this project is to design and implement a wireless control system that allows users to control multiple electrical devices remotely using an ESP32 microcontroller and a relay module. The specific goals include:</p>
+            <ul>
+                <li>To develop a reliable and efficient wireless control system for electrical loads.</li>
+                <li>To use the ESP32 microcontroller for its Wi-Fi capabilities and low power consumption.</li>
+                <li>To demonstrate the practical applications of wireless communication in home automation.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="components">
+            <h2>COMPONENTS USED</h2>
+            <ul>
+                <li>ESP32 Board</li>
+                <li>Four-Relay Module</li>
+                <li>Power Supply (12V)</li>
+                <li>Bulbs and Holders</li>
+                <li>Connecting Wires</li>
+            </ul>
+        </div>
+
+        <div class="section circuit-diagram" id="circuit-diagram">
+            <h2>CIRCUIT DIAGRAM</h2>
+            <img src="https://iotcircuithub.com/wp-content/uploads/2021/04/ESP32-control-4-relays-circuit.jpg" alt="Circuit Diagram">
+        </div>
+
+        <div class="section" id="working-principle">
+            <h2>WORKING PRINCIPLE</h2>
+            <p>The working principle of the Wireless Control System is based on the ability of the ESP32 microcontroller to connect to a Wi-Fi network and receive control signals from a remote device, such as a smartphone or a computer. The ESP32 then processes these signals and activates the appropriate relays to control the connected electrical loads. The system uses a simple web interface or a mobile application to send commands to the ESP32, which in turn controls the relays.</p>
+        </div>
+
+        <div class="section" id="software">
+            <h2>SOFTWARE IMPLEMENTATION</h2>
+            <p>The software implementation involves programming the ESP32 microcontroller to connect to a Wi-Fi network and listen for control signals. The microcontroller is programmed using the Arduino IDE, and the code includes functions to handle Wi-Fi connectivity, web server functionality, and relay control. Below is a simplified version of the code used in this project:</p>
+            <div class="code-block">
+                <pre><code>
+#include <WiFi.h>
+
+const char* ssid = "your_SSID";
+const char* password = "your_PASSWORD";
+
+WiFiServer server(80);
+
+const int relay1 = 26;
+const int relay2 = 27;
+const int relay3 = 14;
+const int relay4 = 12;
+
+void setup() {
+    Serial.begin(115200);
+    WiFi.begin(ssid, password);
+    
+    while (WiFi.status() != WL_CONNECTED) {
+        delay(1000);
+        Serial.println("Connecting to WiFi...");
+    }
+    
+    Serial.println("Connected to WiFi");
+    server.begin();
+    
+    pinMode(relay1, OUTPUT);
+    pinMode(relay2, OUTPUT);
+    pinMode(relay3, OUTPUT);
+    pinMode(relay4, OUTPUT);
+    
+    digitalWrite(relay1, HIGH);
+    digitalWrite(relay2, HIGH);
+    digitalWrite(relay3, HIGH);
+    digitalWrite(relay4, HIGH);
+}
+
+void loop() {
+    WiFiClient client = server.available();
+    
+    if (client) {
+        String request = client.readStringUntil('\r');
+        client.flush();
+        
+        if (request.indexOf("/relay1/on") != -1) {
+            digitalWrite(relay1, LOW);
+        } else if (request.indexOf("/relay1/off") != -1) {
+            digitalWrite(relay1, HIGH);
+        } else if (request.indexOf("/relay2/on") != -1) {
+            digitalWrite(relay2, LOW);
+        } else if (request.indexOf("/relay2/off") != -1) {
+            digitalWrite(relay2, HIGH);
+        } else if (request.indexOf("/relay3/on") != -1) {
+            digitalWrite(relay3, LOW);
+        } else if (request.indexOf("/relay3/off") != -1) {
+            digitalWrite(relay3, HIGH);
+        } else if (request.indexOf("/relay4/on") != -1) {
+            digitalWrite(relay4, LOW);
+        } else if (request.indexOf("/relay4/off") != -1) {
+            digitalWrite(relay4, HIGH);
+        }
+        
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-Type: text/html");
+        client.println("");
+        client.println("<!DOCTYPE HTML>");
+        client.println("<html>");
+        client.println("<body>");
+        client.println("<ESP32 Web Server>");
+        client.println("</body>");
+        client.println("</html>");
+        
+        client.stop();
+    }
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <div class="section" id="applications">
+            <h2>APPLICATIONS</h2>
+            <p>This project has several practical applications, including:</p>
+            <ul>
+                <li>Home Automation:- Control of lights, fans, and other appliances remotely.</li>
+                <li>Industrial Automation:- Remote control of machinery and equipment.</li>
+                <li>Security Systems:- Remote activation of alarms and surveillance cameras.</li>
+                <li>Remote Maintenance:- Perform remote diagnostics and control of equipment for maintenance purposes, reducing the need for on-site visits.</li>
+                <li>Smart Agriculture:- Control irrigation systems, greenhouses, or other agricultural equipment remotely to optimize resource use.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="advantages">
+            <h2>ADVANTAGES AND LIMITATIONS</h2>
+            <ul>
+                <li>Advantages:
+                    <ul>
+                        <li>Convenience: Remotely control devices from anywhere using smartphones or computers.</li>
+                        <li>Energy Efficiency: Optimize energy use, reducing electricity bills.</li>
+                        <li>Safety and Security: Turn off hazardous equipment remotely for enhanced safety.</li>
+                        <li>Scalability: Easily expand or integrate with other smart systems.</li>
+                        <li>Cost-Effective: Affordable solution for automation with budget-friendly components.</li>
+                    </ul>
+                </li>
+                <li>Limitations:
+                    <ul>
+                        <li>Dependency on Wi-Fi: Requires a stable Wi-Fi connection to function properly.</li>
+                        <li>Limited to the range of the Wi-Fi network.</li>
+                        <li>Security Concerns: Vulnerable to hacking if not properly secured.</li>
+                        <li>Complexity in Setup: May require technical knowledge for installation.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section" id="conclusion">
+            <h2>CONCLUSION</h2>
+            <p>The Wireless Control System project successfully demonstrates the feasibility and effectiveness of using wireless communication for the remote control of electrical devices. The system developed is user-friendly, cost-effective, and has significant potential for various applications in home and industrial automation. Future work can involve the integration of more advanced features, such as voice control and integration with smart home ecosystems.</p>
+        </div>
+
+        <div class="section" id="references">
+            <h2>REFERENCES</h2>
+            <ul>
+                <li><a href="https://www.chatgpt.com/">Chat GPT</a></li>
+                <li><a href="https://randomnerdtutorials.com/">Random Nerd Tutorials</a></li>
+                <li><a href="https://www.espressif.com/">Espressif Systems</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function showContent() {
+            document.querySelector('button').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+            document.body.style.justifyContent = 'flex-start';
+            document.body.style.height = 'auto';
+        }
+    </script>
+</body>
+</html>
